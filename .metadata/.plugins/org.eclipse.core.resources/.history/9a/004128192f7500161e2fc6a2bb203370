@@ -1,0 +1,84 @@
+package localhost.javaSailsRestDemo.employee;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+
+/**
+ * 
+ * Sample class that GETS all JSON objects from a  SAIL API named employee
+ * 
+ * @author Mary Ches
+ * @since 2016-09-07
+ *
+ */
+
+
+
+public class GetSingle 
+{
+
+	/**
+	 * The URL of the API we want to connect to
+	 */
+	
+	
+	protected static String endPoint = "http://localhost:1337/employee/";
+	
+	/**
+	 * The character set to use when encoding URL parameters
+	 */
+	
+	protected static String charset = "UTF-8";
+	
+	public static void main(String[] args) 
+	{
+		try
+		{
+			//The id number of the employee you wish to retrieve
+			String userID = "id=25",
+			
+			//creates a new URL out of the endPoint that will retrieve a specific employee 
+			URL getEmployee = new URL(endPoint + "?" + userID);
+			HttpURLConnection connection = (HttpURLConnection) getEmployee.openConnection();
+			connection.setRequestMethod("GET");
+			
+			if (connection.getResponseCode() != 200)
+			{
+				throw new RuntimeException("Failed : HTTP error code : " + connection.getResponseMessage());
+				
+			}
+			
+			//read response into buffer
+			BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+			
+			//loop of buffer line by line until it returns null, meaning there are no more lines
+			while (br.readLine() !=null)
+			{
+				//print out each line to the screen
+				System.out.println(br.readLine());
+			}
+			
+			//close connection to API
+			connection.disconnect();
+		
+		}//end try
+		
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+	}//end main
+	
+}//end class
+

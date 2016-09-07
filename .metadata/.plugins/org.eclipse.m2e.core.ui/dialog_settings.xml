@@ -44,12 +44,15 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="localhost.javaSailsRestDemo.employee"/>
 			<item value="localhost.googlemaps.directions"/>
 		</list>
 		<list key="groupId">
+			<item value="localhost.javaSailsRestDemo"/>
 			<item value="localhost.googlemaps"/>
 		</list>
 		<list key="artifactId">
+			<item value="employee"/>
 			<item value="directions"/>
 		</list>
 		<list key="projectNameTemplate">
